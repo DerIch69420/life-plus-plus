@@ -1,6 +1,6 @@
 local love = require("love")
 
-local push = require("push")
+local push = require("src.push")
 
 local menu = require("src.menu")
 local game = require("src.game")
@@ -21,7 +21,7 @@ function love.load()
 		vsync = true
 	})
 
-	menu:init()
+	currentState:init()
 	math.randomseed(os.time())
 end
 
