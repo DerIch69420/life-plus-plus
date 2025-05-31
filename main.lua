@@ -21,7 +21,7 @@ function love.load()
 		vsync = true
 	})
 
-	menu:init()
+	currentState:init()
 	math.randomseed(os.time())
 end
 
