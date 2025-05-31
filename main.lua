@@ -1,39 +1,38 @@
 local love = require("love")
 
-local state = require("src.state")
 local menu = require("src.menu")
 local game = require("src.game")
 
+local states = {
+	menu = menu,
+	game = game,
+}
+local currentState = menu
+
 function love.load()
-	state:init()
+	menu:init()
 
 	math.randomseed(os.time())
-	game:initGrid()
 end
 
 function love.keypressed(key)
-	if state:is("menu") then
-		if key == "return" then
-			state:update("game")
+	if currentState.keypressed then
+		local switchTo = currentState:keypressed(key)
+		if switchTo and states[switchTo] then
+			currentState = states[switchTo]
+			currentState:init()
 		end
-	elseif state:is("game") then
-		if key == "escape" then
-			state:update("menu")
-		end
-	end
-end
-
-function love.draw()
-	if state:is("menu") then
-		menu:draw()
-	elseif state.is("game") then
-		game:draw()
 	end
 end
 
 function love.update(dt)
-	if state:is("menu") then
-	elseif state.is("game") then
-		game:updateGrid()
+	if currentState.update then
+		currentState:update(dt)
+	end
+end
+
+function love.draw()
+	if currentState.draw then
+		currentState:draw()
 	end
 end

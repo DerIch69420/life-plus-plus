@@ -9,7 +9,7 @@ Game.gridHeight = math.floor(screenHeight / Game.cellSize)
 Game.grid = {}
 Game.nextGrid = {}
 
-function Game:initGrid()
+function Game:init()
     for x = 0, self.gridWidth - 1 do
         self.grid[x] = {}
         self.nextGrid[x] = {}
@@ -35,7 +35,7 @@ function Game:countNeighbors(x, y)
     return count
 end
 
-function Game:updateGrid()
+function Game:update(dt)
     for x = 0, self.gridWidth - 1 do
         for y = 0, self.gridHeight - 1 do
             local neighbors = self:countNeighbors(x, y)
@@ -61,6 +61,12 @@ function Game:draw()
                 love.graphics.rectangle("fill", x * self.cellSize, y * self.cellSize, self.cellSize, self.cellSize)
             end
         end
+    end
+end
+
+function Game:keypressed(key)
+    if key == "escape" then
+        return "menu"
     end
 end
 
