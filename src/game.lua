@@ -2,7 +2,7 @@ local Game = {}
 
 local screenWidth, screenHeight = love.graphics.getDimensions()
 
-Game.cellSize = 10
+Game.cellSize = 5
 Game.gridWidth = math.floor(screenWidth / Game.cellSize)
 Game.gridHeight = math.floor(screenHeight / Game.cellSize)
 
