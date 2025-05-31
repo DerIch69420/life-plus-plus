@@ -39,9 +39,19 @@ function love.keypressed(key)
 	end
 end
 
+function love.mousepressed(x, y, button)
+    if currentState.mousepressed then
+        currentState:mousepressed(x, y, button)
+    end
+end
+
 function love.update(dt)
 	if currentState.update then
-		currentState:update(dt)
+		local switchTo = currentState:update(dt)
+		if switchTo and states[switchTo] then
+			currentState = states[switchTo]
+			currentState:init()
+		end
 	end
 end
 
