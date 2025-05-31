@@ -49,19 +49,19 @@ Cell.weightedTypes = {
 
     { type = "white",   weight = 5000 },
     { type = "red",     weight = 1000 },
-    { type = "blue",    weight = 0 },
-    { type = "green",   weight = 0 },
-    { type = "yellow",  weight = 0 },
-    { type = "cyan",    weight = 0 },
-    { type = "magenta", weight = 0 },
-    { type = "orange",  weight = 0 },
-    { type = "purple",  weight = 0 },
-    { type = "pink",    weight = 0 },
-    { type = "brown",   weight = 0 },
-    { type = "gray",    weight = 0 },
-    { type = "lime",    weight = 0 },
-    { type = "teal",    weight = 0 },
-    { type = "navy",    weight = 0 },
+    { type = "blue",    weight = 1 },
+    { type = "green",   weight = 10 },
+    { type = "yellow",  weight = 10 },
+    { type = "cyan",    weight = 10 },
+    { type = "magenta", weight = 10 },
+    { type = "orange",  weight = 10 },
+    { type = "purple",  weight = 10 },
+    { type = "pink",    weight = 10 },
+    { type = "brown",   weight = 10 },
+    { type = "gray",    weight = 10 },
+    { type = "lime",    weight = 10 },
+    { type = "teal",    weight = 10 },
+    { type = "navy",    weight = 10 },
 }
 
 -- Pick a random cell type based on weights
@@ -131,6 +131,18 @@ function Cell:update(x, y, game, countNeighbors)
         white = self.updateWhiteCell,
         red = self.updateRedCell,
         blue = self.updateBlueCell,
+        green = self.updateGreenCell,
+        yellow = self.updateYellowCell,
+        cyan = self.updateCyanCell,
+        magenta = self.updateMagentaCell,
+        orange = self.updateOrangeCell,
+        purple = self.updatePurpleCell,
+        pink = self.updatePinkCell,
+        brown = self.updateBrownCell,
+        gray = self.updateGrayCell,
+        lime = self.updateLimeCell,
+        teal = self.updateTealCell,
+        navy = self.updateNavyCell,
     }
 
     local updateFunc = updater[self.type]
@@ -168,12 +180,17 @@ end
 
 function Cell:updateRedCell(x, y, game, countNeighbors)
     local blueNeighbors = countNeighbors(game, x, y, "blue")
+    local whiteNeighbors = countNeighbors(game, x, y, "white")
 
-    if blueNeighbors ~= 0 then
+    if blueNeighbors == 0 and whiteNeighbors ~= 1 then
         return "red"
-    else
+    end
+
+    if whiteNeighbors > 2 then
         return "white"
     end
+
+    return "dead"
 end
 
 function Cell:updateBlueCell(x, y, game, countNeighbors)
@@ -184,6 +201,54 @@ function Cell:updateBlueCell(x, y, game, countNeighbors)
     end
 
     return "blue"
+end
+
+function Cell:updateGreenCell(x, y, game, countNeighbors)
+    return "green"
+end
+
+function Cell:updateYellowCell(x, y, game, countNeighbors)
+    return "yellow"
+end
+
+function Cell:updateCyanCell(x, y, game, countNeighbors)
+    return "cyan"
+end
+
+function Cell:updateMagentaCell(x, y, game, countNeighbors)
+    return "magenta"
+end
+
+function Cell:updateOrangeCell(x, y, game, countNeighbors)
+    return "orange"
+end
+
+function Cell:updatePurpleCell(x, y, game, countNeighbors)
+    return "purple"
+end
+
+function Cell:updatePinkCell(x, y, game, countNeighbors)
+    return "pink"
+end
+
+function Cell:updateBrownCell(x, y, game, countNeighbors)
+    return "brown"
+end
+
+function Cell:updateGrayCell(x, y, game, countNeighbors)
+    return "gray"
+end
+
+function Cell:updateLimeCell(x, y, game, countNeighbors)
+    return "lime"
+end
+
+function Cell:updateTealCell(x, y, game, countNeighbors)
+    return "teal"
+end
+
+function Cell:updateNavyCell(x, y, game, countNeighbors)
+    return "navy"
 end
 
 -- -- -- -- -- -- -- -- -- --
