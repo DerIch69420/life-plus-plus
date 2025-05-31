@@ -47,21 +47,8 @@ function Game:update(dt)
             local currentCell = self.grid[x][y]
             local newType = nil
 
-            if currentCell.type == "white" then
-                newType = currentCell:updateWhiteCell(x, y, self, self.countNeighbors)
-            elseif currentCell.type == "red" then
-                newType = currentCell:updateRedCell(x, y, self, self.countNeighbors)
-            elseif currentCell.type == "blue" then
-                newType = currentCell:updateBlueCell(x, y, self, self.countNeighbors)
-            else
-                -- Dead cell: revive if exactly 3 white neighbors
-                local whiteNeighbors = self:countNeighbors(x, y, "white")
-                if whiteNeighbors == 3 then
-                    newType = "white"
-                else
-                    newType = nil
-                end
-            end
+            -- Use Cell:update to determine the new type based on current type
+            newType = currentCell:update(x, y, self, self.countNeighbors)
 
             self.nextGrid[x][y]:setType(newType)
         end
