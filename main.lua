@@ -1,6 +1,6 @@
 local love = require("love")
 
-local push = require("push")
+local push = require("src.push")
 
 local menu = require("src.menu")
 local game = require("src.game")
