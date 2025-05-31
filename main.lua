@@ -3,11 +3,13 @@ local love = require("love")
 local push = require("src.push")
 
 local menu = require("src.menu")
+local settings = require("src.settings")
 local game = require("src.game")
 
 local states = {
 	menu = menu,
 	game = game,
+    settings = settings,
 }
 local currentState = menu
 
